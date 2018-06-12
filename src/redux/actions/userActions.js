@@ -114,6 +114,7 @@ export function updaeUser(id){
         .then (
             response => {
                 dispatch(getUserList())
+                dispatch({type: types.UPDATE_USER})
                 console.log('Success: ' + response)
             }
         )

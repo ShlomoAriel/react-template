@@ -15,6 +15,7 @@ class App extends React.Component {
         super(props, context)
     }
     componentWillMount(){
+        var test = this.props.match ? this.props.match.params:''
       if( !(this.props.authenticated)){
           const jwt = localStorage.getItem('token')
           if(!jwt){

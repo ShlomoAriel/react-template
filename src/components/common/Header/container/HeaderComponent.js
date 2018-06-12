@@ -1,3 +1,4 @@
+import React from 'react'
 import {connect} from 'react-redux';
 import R from 'ramda';
 import * as systemActions from 'redux/actions/systemActions'
@@ -5,8 +6,21 @@ import * as loginActions from 'redux/actions/loginActions'
 import Header from '../display/Header';
 import { hashHistory } from 'react-router-dom'
 
+class HeaderCointainer extends React.Component {
+    componentDidMount(){
+        var test = this.props.match ? this.props.match.params:''
+    }
+    componentDidUpdate(prevProps, prevState) {}
 
-function mapStateToProps(state) {
+    render() {
+        return <Header 
+                    {...this.props}/>
+    }
+
+}
+
+function mapStateToProps(state, ownProps) {
+    let location = ownProps.match ?ownProps.match.params : ''
     return {
         authenticated:state.login.authenticated,
         isAdmin: state.login.isAdmin,
@@ -30,5 +44,5 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect( mapStateToProps, mapDispatchToProps )(Header)
+export default connect( mapStateToProps, mapDispatchToProps )(HeaderCointainer)
 

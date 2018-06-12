@@ -2,9 +2,10 @@ import * as types from '../actions/actionTypes';
 import R from 'ramda';
 const emptyForm = {
         email:'',
-        firstName:'',
-        lastName:'',
+        name:'',
         email:'',
+        password:'',
+        passwordConfirm:'',
     }
 const initialState = {
 	form:emptyForm,
@@ -21,9 +22,21 @@ export default function(state = initialState, action) {
             return R.assoc('currentUser', action.user, state )
         case types.SET_CURRENT_USER_LIST:
             return R.assocPath(['currentUser', action.listName], action.list, state )
+        case types.UPDATE_USER:
+            var newState =  R.clone(state)
+            newState.form = emptyForm;
+            newState.currentUser = {};
+            return newState
         case types.SET_EDIT_USER:
             var newState =  R.clone(state)
-            newState.form = R.mergeDeepRight(emptyForm,action.user)
+            if(state.currentUser._id != action.user._id){
+                newState.form = R.mergeDeepRight(emptyForm,action.user)
+                delete newState.form.password
+                newState.currentUser = action.user
+            } else{
+                newState.form = emptyForm
+                newState.currentUser = {}
+            }
             return newState
         case types.SET_USER_LIST:
             return R.assoc('userList', action.userList, state )
