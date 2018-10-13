@@ -43,6 +43,10 @@ const Signup = ({form, authenticated, userList, onInputFieldChange, addUser, rem
 						  		<TextInput {...fields[fieldName]}/>
 					  		</div>	
 				  		)}
+				  		<div className="button-holder">
+  						  		<input className="form-control"/>
+  						  		<button className="fa fa-arrow-circle-o-right login-button" onClick={addUser}></button>
+  					  		</div>
 					  	</div>
 				  	</form>
 		  		</div>
